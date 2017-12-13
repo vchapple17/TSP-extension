@@ -11,8 +11,8 @@ TSP is NP-Hard.  Included is a nearest neighbor algorithm with 2-Opt Swap.  A kd
 
 ## Files
 * NN_KDTree
-    * KDTree_main.py file that implements the kd-tree structure and 2-Opt swap
-    * \_twoOpt.c and \_twoOpt.so python C-extension files copied from twoOpt folder
+    * `KDTree_main.py` file that implements the kd-tree structure and 2-Opt swap
+    * `\_twoOpt.c` and `\_twoOpt.so` python C-extension files copied from twoOpt folder
 * tsp_test_cases
     * contains .txt files of 10 samples of city data.
         * Each line in the file contains a city ID, city x-coordinate and y-coordinate separated by spaces.
@@ -20,20 +20,20 @@ TSP is NP-Hard.  Included is a nearest neighbor algorithm with 2-Opt Swap.  A kd
     * Solutions to each file end in .tour
     * Time to get each solution end in .tourTime
 * twoOpt
-    * \_twoOpt.c - C-extension file
-    * main.py - file to test C-extension
-    * setup.py - build extension `python setup.py build_ext -i`
-    * twoOpt.c and twoOpt.h - C function for 2-Opt Swap
-* util (Supplementa)
-    * tsp-verifier.py and TSPAllVisited.py
+    * `\_twoOpt.c` - C-extension file
+    * `main.py` - file to test C-extension
+    * `setup.py` - build extension `python setup.py build_ext -i`
+    * `twoOpt.c` and `twoOpt.h` - C function for 2-Opt Swap
+* `util`
+    * `tsp-verifier.py` and `TSPAllVisited.py`
     * useful for that solutions are a valid solutions to the TSP problem.
 
 
 ## Results
-TSP results with kd-tree in Python and 2-Opt in C
+TSP results with kd-tree in Python 2.7 and 2-Opt in C.
 
-| File                | Num. Cities  | Min Dist | Time (sec)  |
-| ------------------- |:------------:| :-------:|:-----------:|
+| Input File          | Num. Cities  | Min Dist | Time (sec)  |
+| ------------------- |:------------:| --------:|:-----------:|
 | tsp_example_1.txt   | 76           | 118530   | 0.0105      |
 | tsp_example_2.txt   | 280          | 3100     | 0.0640      |
 | tsp_example_3.txt   | 15112        |          | |

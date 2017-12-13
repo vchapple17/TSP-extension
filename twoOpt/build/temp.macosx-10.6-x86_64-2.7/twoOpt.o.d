@@ -1,1 +1,0 @@
-commandline: -I/anaconda3/envs/TwoPointSeven/lib/python2.7/site-packages/numpy/core/include -I/anaconda3/envs/TwoPointSeven/include/python2.7 -c-I/anaconda3/envs/TwoPointSeven/lib/python2.7/site-packages/numpy/core/include -I/anaconda3/envs/TwoPointSeven/include/python2.7
