@@ -1,21 +1,25 @@
+# Amended Dec 6, 2017
+# Val Chapple
+# To include c-extensions for optimization
+# To include c-extensions for distance squared matrix development
+
+
+# Original:
 # Val Chapple
 # Cody Dhein
 # Date: Nov 22, 2017
-#
-# KDTree performs under 3 minutes
-#
-# Resources:
-# Overall Concepts: An introductory tutorial on kd trees by Andrew W  Moore
-#       Carnegie Mellon University, Extract from Andrew Moore's PhD Thesis
-# Construction: https://www.cise.ufl.edu/class/cot5520fa09/CG_RangeKDtrees.pdf
-# Querying: https://web.engr.oregonstate.edu/~tgd/classes/534/slides/part3.pdf
-#
+
 import sys
+import os.path
+sys.path.append('./../twoOpt')
+
 from operator import itemgetter
 import heapq
 import math
 import timeit
 import numpy as np
+
+import _twoOpt
 
 # KDTreeNN
 #
@@ -38,11 +42,20 @@ def kdTreeNN(text, outfilename):
     # if (len(points) <= 400 ):
     #     (totalDist, route) = twoOptImprove(route , distSqdMatrix)
 
+    # data = [ [r.city[0], r.city[1], r.city[2] ] for r in route]
+
+    # Transpose data for parallel arrays
+    data = np.array( [ [row[i] for row in [ [r.city[0], r.city[1], r.city[2] ] for r in route] ] for i in range(3) ], dtype=np.int32)
+
+    # data = np.array([ [row[i] for row in points] for i in range(3) ], dtype=np.int32)
+
+    (totalDist, route) = _twoOpt.twoOpt(data[0],data[1],data[2], len(points))
+
     # Save route
     outFile = open(outfilename, "w")
     outFile.write(str(totalDist) + "\n")
     for i in route:
-        outFile.write(str(i.city[0]) + "\n")
+        outFile.write(str(i) + "\n")
     return
 
 # kDNode
@@ -225,25 +238,3 @@ def dist_sqd( city1, city2 ):
 #         length += int(round(math.sqrt(dists[c1][c2])))
 #     length += int(round(math.sqrt(dists[ tour[0] ][ tour[len(tour)-1] ] )))
 #     return length
-
-# Main Program - kd-tree
-if __name__ == '__main__':
-    t1= timeit.default_timer()
-    # Check input file name exists
-    try:
-        filename = sys.argv[1]
-    except:
-        print("Usage: " + sys.argv[0] + " <inputfilename>")
-        sys.exit()
-
-    outfilename = filename + ".tour"
-    # Read file with city Id, city x, and city y
-    text = inFile.read().splitlines()
-
-    kdTreeNN(text, outfilename)
-
-    t2 = timeit.default_timer()
-
-    fileWrite = open(filename + ".tourTime", "w")
-    fileWrite.write(str(t2-t1) + "\n")
-    fileWrite.close()

@@ -28,41 +28,62 @@ long int twoOpt( int *c, int *x, int *y, int num ) {
         m[i][j] = INFINITY;
       }
       else {           // Save distance squared between the two different cities
-        m[i][j] = dist_sqd( x[i], y[i], x[j], y[j] );
-        m[j][i] = m[i][j];
+        m[c[i]][c[j]] = dist_sqd( x[i], y[i], x[j], y[j] );
+        m[c[j]][c[i]] = m[c[i]][c[j]];
       }
     }
   }
+
   // optimize traverse city ID array (aka route)
   long int change = -1;
+  int maxIterations = 5000;
+  int iterations = 0;
+  // while ( (change < 0) && ( iterations < maxIterations)) {
   while (change < 0) {
     int i;
     for (i = 1; i < num - 2; i++ ) {
+      iterations++;
+      // int flag = 0;
       for (j = i+1; j < num - 1; j++ ) {
-        // Add distance of i-1 to i plus j to j+1
-        long int curSum = m[i-1][i] + m[j][j+1];
-        // Add distance of i-1 to j plus i to j+1
-        long int newSum = m[i-1][j] + m[i][j+1];
-        // Calculate change. If negative change, keep new version
+        // printf("here1");
+        // Add distance of i-1 to i with j to j+1
+        long int curSum = m[c[i-1]][c[i]] + m[c[j]][c[j+1]];
+        // Add distance of i-1 to j with i to j+1
+        long int newSum = m[c[i-1]][c[j]] + m[c[i]][c[j+1]];
+        // Calculate change. If negative change, keep new version via a swap
         change = newSum - curSum;
-        // twoOptSwap( c, x, y, num, i, j);
-        // break;
         if (change < 0) {
-          //printf("change: %ld\n", change);
           twoOptSwap( c, x, y, num, i, j);
           break;
         }
       }
+      if (change < 0) {
+        break;
+      }
+      else {
+        continue;
+      }
     }
-    break;
   }
 
   // Calculate Distance with Matrix already made
   long int totalDist = 0;
   for (i = 0; i < num-1; i++ ) {
-    totalDist += ( long int )round( sqrt( (double) m[i][i+1] ) );
+    // printf("%d to %d: %ld\n", c[i], c[i+1], m[ c[i] ] [c[i+1]]);
+    long int dist = m[ c[i] ] [c[i+1]];
+    // printf("%ld\n", dist);
+    totalDist += ( long int )round( sqrt( (double) m[ c[i] ] [c[i+1]] ) );
   }
-  totalDist += ( long int )round( sqrt( (double) m[0][num-1] ) );
+  // printf("%d to %d: %ld\n", c[num-1], c[0], m[ c[0] ] [c[num-1]]);
+  long int dist =  m[ c[0] ][ c[num-1] ];
+  // printf("%ld\n", dist);
+  totalDist += ( long int )round( sqrt( (double) m[ c[0] ][ c[num-1] ] ) );
+  // printf("%d\n", totalDist);
+  for (i = 0; i < num-1; i++ ) {
+    // printf("%d\n", c[i]);
+    // printf("%d (%d,%d) to %d (%d,%d): %ld\n", c[i], x[i], y[i], c[i+1], x[i+1], y[i+1],( long int )round( sqrt( (double) m[ c[i] ] [c[i+1]] ) ));
+  }
+  // printf("%d to %d: %ld\n", c[num-1], c[0], ( long int )round( sqrt( (double) m[ c[0] ][ c[num-1] ] ) ));
 
   // Free 2D Matrix
   for (k = 0; k < num; k++) {
@@ -76,7 +97,6 @@ long int twoOpt( int *c, int *x, int *y, int num ) {
 // Euclidean Distance Squared between (x,y) of two cities
 // e.g.  (x1,y1) and (x2,y2). returns: (x1-x2)^2 + (y1-y2)^2
 long int dist_sqd( int x1, int y1, int x2, int y2) {
-
   return (long int)( ( x1 - x2 )*( x1 - x2 ) + ( y1 - y2 )*( y1 - y2 ) );
 }
 

@@ -1,0 +1,14 @@
+#!/bin/bash
+cd ./twoOpt
+python setup.py build_ext -i > log
+if [ "$?" = 0 ]
+then
+    cp _twoOpt.c ../NN_KDTree/_twoOpt.c
+    cp _twoOpt.so ../NN_KDTree/_twoOpt.so
+    cd ..
+    echo "Test Case 5"
+    python main.py ./tsp_test_cases/test-input-5.txt
+    python ./util/tsp-verifier.py ./tsp_test_cases/test-input-5.txt ./tsp_test_cases/test-input-5.txt.tour
+else
+    cat log
+fi

@@ -43,5 +43,12 @@ if __name__ == '__main__':
     outfilename = filename + ".tour"
 
     t2 = timeit.default_timer()
+
     kdTreeNN( dataIn, outfilename)
+
     t3 = timeit.default_timer()
+    print("time: " + str(t3-t2))
+    # Save time
+    outFile = open(outfilename + "Time", "w")
+    outFile.write(str(t3-t2) + "\n")
+    outFile.close()

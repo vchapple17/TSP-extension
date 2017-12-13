@@ -1,0 +1,20 @@
+#!/bin/bash
+cd ./twoOpt
+python setup.py build_ext -i > log
+if [ "$?" = 0 ]
+then
+    cp _twoOpt.c ../NN_KDTree/_twoOpt.c
+    cp _twoOpt.so ../NN_KDTree/_twoOpt.so
+    cd ..
+    echo "Example 1"
+    python main.py ./tsp_test_cases/tsp_example_1.txt
+    python ./util/tsp-verifier.py ./tsp_test_cases/tsp_example_1.txt ./tsp_test_cases/tsp_example_1.txt.tour
+    #echo "Example 2"
+    #python main.py ./tsp_test_cases/tsp_example_2.txt
+    #python ./util/tsp-verifier.py ./tsp_test_cases/tsp_example_2.txt ./tsp_test_cases/tsp_example_2.txt.tour
+    #echo "Example 3"
+    #python main.py ./tsp_test_cases/tsp_example_3.txt
+    #python ./util/tsp-verifier.py ./tsp_test_cases/tsp_example_3.txt ./tsp_test_cases/tsp_example_3.txt.tour
+else
+    cat log
+fi
