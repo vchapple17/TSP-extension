@@ -32,15 +32,15 @@ TSP is NP-Hard.  Included is a nearest neighbor algorithm with 2-Opt Swap.  A kd
 ## Results
 TSP results with kd-tree in Python 2.7 and 2-Opt in C.
 
-| Input File          | Num. Cities  | Min Dist | Time (sec)  |
-| ------------------- |:------------:| --------:|:-----------:|
-| tsp_example_1.txt   | 76           | 118530   | 0.0105      |
-| tsp_example_2.txt   | 280          | 3100     | 0.0640      |
-| tsp_example_3.txt   | 15112        |          | |
-| test-input-1.txt    | 50           | 5707     | 0.0064      |
-| test-input-2.txt    | 100          | 8458     | 0.0122      |
-| test-input-3.txt    | 250          | 14099    | 0.0509      |
-| test-input-4.txt    | 500          | 19588    | 0.1494      |
-| test-input-5.txt    | 1000         | 26301    | 0.8517      |
-| test-input-6.txt    | 2000         | 36928    | 7.899       |
-| test-input-7.txt    | 5000         | 57659    | 358.8       |
+| Input File         | # Cities | Optimal | Algorithm | Ratio| Time (sec)  |
+| ------------------ |:--------:| --------:| --------:|-----:|:-----------:|
+| tsp_example_1.txt  | 76       |   108159 | 118530   | 1.10 | 0.0105      |
+| tsp_example_2.txt  | 280      |     2579 | 3100     | 1.20 | 0.0640      |
+| tsp_example_3.txt  | 15112    |  1573084 | 1743282  | 1.11 | 62373 (17hr)|
+| test-input-1.txt   | 50       |     5333 | 5707     | 1.07 | 0.0064      |
+| test-input-2.txt   | 100      |     7411 | 8458     | 1.14 | 0.0122      |
+| test-input-3.txt   | 250      |    12235 | 14099    | 1.15 | 0.0509      |
+| test-input-4.txt   | 500      |    17130 | 19588    | 1.14 | 0.1494      |
+| test-input-5.txt   | 1000     |    23860 | 26301    | 1.10 | 0.8517      |
+| test-input-6.txt   | 2000     |    33816 | 36928    | 1.10 | 7.899       |
+| test-input-7.txt   | 5000     |    53422 | 57659    | 1.08 | 358.8 (6min)|
