@@ -7,8 +7,8 @@ then
     cp _twoOpt.so ../NN_KDTree/_twoOpt.so
     cd ..
     echo "Example 1"
-    python main.py ./tsp_test_cases/tsp_example_1.txt
-    python ./util/tsp-verifier.py ./tsp_test_cases/tsp_example_1.txt ./tsp_test_cases/tsp_example_1.txt.tour
+    python2.7 main.py ./tsp_test_cases/tsp_example_1.txt
+    python2.7 ./util/tsp-verifier.py ./tsp_test_cases/tsp_example_1.txt ./tsp_test_cases/tsp_example_1.txt.tour
     #echo "Example 2"
     #python main.py ./tsp_test_cases/tsp_example_2.txt
     #python ./util/tsp-verifier.py ./tsp_test_cases/tsp_example_2.txt ./tsp_test_cases/tsp_example_2.txt.tour

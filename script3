@@ -7,7 +7,7 @@ then
     cp _twoOpt.so ../NN_KDTree/_twoOpt.so
     cd ..
     echo "Example 3"
-    python main.py ./tsp_test_cases/tsp_example_3.txt
+    nohup python main.py ./tsp_test_cases/tsp_example_3.txt
     python ./util/tsp-verifier.py ./tsp_test_cases/tsp_example_3.txt ./tsp_test_cases/tsp_example_3.txt.tour
 else
     cat log
