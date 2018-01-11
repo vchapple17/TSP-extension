@@ -1,6 +1,6 @@
 #!/bin/bash
 cd ./twoOpt
-python setup.py build_ext -i > log
+python2.7 setup.py build_ext -i > log
 if [ "$?" = 0 ]
 then
     cp _twoOpt.c ../NN_KDTree/_twoOpt.c
